@@ -21,7 +21,6 @@ const CodeForm = ({ setVerified, lastMail }) => {
     )
     const getCode = (value) => {
 
-        setMail(value.email);
         fetch(`${API_URL}/makecode`, {
             method: 'POST',
             headers: {
@@ -34,8 +33,7 @@ const CodeForm = ({ setVerified, lastMail }) => {
 
                 const jsonRes = await res.json();
                 if (res.status == 200) {
-                    setSent(true);
-
+                    setResult({message: jsonRes.message, success: true});
                 }
                 else {
 
@@ -90,6 +88,8 @@ const CodeForm = ({ setVerified, lastMail }) => {
                 >
                     {!result.success &&
                         <Text style={globalStyles.issueNotif}>{result.message}</Text>}
+                    {result.success &&
+                        <Text style={globalStyles.notif}>{result.message}</Text>}
 
                     {
                         touched.code && errors.code &&
