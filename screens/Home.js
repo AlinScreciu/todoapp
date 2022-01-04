@@ -1,43 +1,39 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
-import { View, FlatList, TouchableWithoutFeedback, Keyboard, Platform, TouchableOpacity } from 'react-native';
+import { View, FlatList, TouchableWithoutFeedback, Keyboard, Platform } from 'react-native';
 import Header from '../components/header';
 import TodoItem from '../components/todoItem';
 import AddTodo from '../components/addTodo';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import Icon from 'react-native-vector-icons/MaterialIcons'
 
 import globalStyles from '../styles/globalStyles';
 
-const getLastList = async(email) => {
-    
+const getLastList = async (email) => {
+
   try {
-    console.log(email);
-      const value = await AsyncStorage.getItem("@"+email);
-      if(value!==null) return JSON.parse(value);
-      else return [];
+
+    const value = await AsyncStorage.getItem("@" + email);
+    if (value !== null) return JSON.parse(value);
+    else return [];
   }
-  catch(e)
-  {
-      console.log(e);
+  catch (e) {
+    console.log(e);
   }
 }
 
-const storeList = async (data,email) =>
-{
+const storeList = async (data, email) => {
   try {
-      const jsonData = JSON.stringify(data);
-      //console.log(jsonData+" 30");
-      await AsyncStorage.setItem("@"+email,jsonData);
+    const jsonData = JSON.stringify(data);
+
+    await AsyncStorage.setItem("@" + email, jsonData);
   }
-  catch (e)
-  {
-      console.log(e);
+  catch (e) {
+    console.log(e);
   }
 }
 
-const Home = ({navigation, route}) => {
+const Home = ({ navigation, route }) => {
   const email = route.params.email;
   const [todos, setTodos] = useState()
   const pressHandler = (key) => {
@@ -46,35 +42,34 @@ const Home = ({navigation, route}) => {
     })
   }
   useEffect(() => {
-    getLastList(email).then(data => setTodos(data)).catch(err=>console.log(err))
-    
+    getLastList(email).then(data => setTodos(data)).catch(err => console.log(err))
+
   }, [])
   useEffect(() => {
-    if(todos !== undefined) {
+    if (todos !== undefined) {
 
-    //console.log(todos);
-    //console.log("second ue");
-    storeList(todos,email).catch(err=>console.log(err));
 
-  }}, [todos])
+
+      storeList(todos, email).catch(err => console.log(err));
+
+    }
+  }, [todos])
   const submitHandler = (text) => {
     if (text.length > 3) {
-      if(todos.length < 1)
-      {
+      if (todos.length < 1) {
         setTodos([{ text: text, key: Math.random().toString() }]);
       } else
-      setTodos((prevTodos) => {
-        return [
-          { text: text, key: Math.random().toString() },
-          ...prevTodos
-        ]
-      })
+        setTodos((prevTodos) => {
+          return [
+            { text: text, key: Math.random().toString() },
+            ...prevTodos
+          ]
+        })
     }
   }
-  const accountIconOnPressHandler = () =>
-  {
+  const accountIconOnPressHandler = () => {
 
-    navigation.navigate('Account',{"email": email});
+    navigation.navigate('Account', { "email": email });
   }
   return (
     //<Sandbox />
@@ -84,8 +79,8 @@ const Home = ({navigation, route}) => {
     }}>
       <View style={globalStyles.homeContainer}>
         {/* header*/}
-        <Header onPressHandler = {accountIconOnPressHandler}/>
-        
+        <Header onPressHandler={accountIconOnPressHandler} />
+
         <View style={globalStyles.homeContent}>
           {/* to form */}
           <AddTodo submitHandler={submitHandler} />

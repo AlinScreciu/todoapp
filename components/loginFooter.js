@@ -15,7 +15,7 @@ const LoginFooter = ({navigation}) =>
         </View>
         <View  style={globalStyles.forgot}>
           <Text style={{color: '#777',}}>or</Text>
-          <TouchableOpacity onPress = {() => navigation.navigate('Signup')}>
+          <TouchableOpacity onPress = {() => navigation.navigate('Forgot')}>
             <Text style={globalStyles.fadedLink}>Forgot password?</Text>
           </TouchableOpacity>
         </View>

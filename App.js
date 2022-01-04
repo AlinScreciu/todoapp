@@ -1,11 +1,10 @@
-import { StatusBar } from 'expo-status-bar';
-import React,{useState, useEffect} from 'react';
-import { Text, View } from 'react-native';
+import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './screens/Home';
 import Login from './screens/Login';
 import Signup from './screens/Signup';
+import Forgot from './screens/Forgot';
 import globalStyles from './styles/globalStyles';
 import Account from './screens/Account';
 
@@ -14,10 +13,9 @@ import Account from './screens/Account';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const [autoLogin, setAutoLogin] = useState(false);
-  
+
   return (
-    
+
     <NavigationContainer style={globalStyles.root}>
       <Stack.Navigator initialRouteName={'Login'}>
         <Stack.Screen
@@ -44,10 +42,17 @@ export default function App() {
             headerShown: false,
             title: 'Login'
           }}
-          >
+        >
           {props => <Login {...props} />}
         </Stack.Screen>
-
+        <Stack.Screen
+          name='Forgot'
+          options={{
+            headerShown: true,
+            title: 'Forgot Password'
+          }}>
+          {props => <Forgot {...props} />}
+        </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );

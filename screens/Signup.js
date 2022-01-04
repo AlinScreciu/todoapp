@@ -1,9 +1,8 @@
 import React from "react";
-import {Text, View} from 'react-native';
+import { View } from 'react-native';
 import SignupForm from "../components/signupForm";
 import globalStyles from "../styles/globalStyles";
-const Signup = ({navigation}) =>
-{
+const Signup = () => {
     return (
         <View style={globalStyles.root}>
             <SignupForm />

@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Button, TouchableOpacity} from 'react-native';
-import globalStyles from '../styles/globalStyles';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 
 
-const AddTodo = ({submitHandler}) => 
-{
+const AddTodo = ({ submitHandler }) => {
     const [text, setText] = useState('');
     const [err, setErr] = useState('');
     const [focused, setFocused] = useState(false);
@@ -12,45 +10,44 @@ const AddTodo = ({submitHandler}) =>
         setText(val);
     }
 
-    useEffect(() => 
-    {
-        ( focused && (text.length < 3 || text.length == 0) ) ? 
-        setErr('Length has to be over 3 characters') 
-        :
-        setErr('')
+    useEffect(() => {
+        (focused && (text.length < 3 || text.length == 0)) ?
+            setErr('Length has to be over 3 characters')
+            :
+            setErr('')
     }, [text, focused])
-        
 
-    const clearText = () => {setText('')};
-    
+
+    const clearText = () => { setText('') };
+
     return (
         <View>
             {
-            err ? 
-            <Text style={styles.issueNotif}>{err}</Text>
-            :
-            null
+                err ?
+                    <Text style={styles.issueNotif}>{err}</Text>
+                    :
+                    null
             }
-            <TextInput 
-                style = {styles.input}
-                placeholder = 'new todo...'
-                onChangeText = {changeHandler}
-                value = {text}
-                onFocus = {() => setFocused(true)}
-                onBlur = {() => setFocused(false)}
+            <TextInput
+                style={styles.input}
+                placeholder='new todo...'
+                onChangeText={changeHandler}
+                value={text}
+                onFocus={() => setFocused(true)}
+                onBlur={() => setFocused(false)}
             />
-   
+
             <TouchableOpacity
-                onPress = { () => {
-                    submitHandler(text); 
-                    clearText(); 
+                onPress={() => {
+                    submitHandler(text);
+                    clearText();
                 }}
                 style={styles.button}
-                
+
             >
                 <Text style={styles.buttonText}>ADD TODO</Text>
             </TouchableOpacity>
-            </View>
+        </View>
     )
 }
 
@@ -63,7 +60,7 @@ const styles = StyleSheet.create({
         color: 'red',
         fontWeight: 'bold',
     },
-    input: 
+    input:
     {
         marginBottom: 10,
         paddingHorizontal: 8,

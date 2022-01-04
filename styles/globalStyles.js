@@ -6,16 +6,23 @@ const globalStyles = StyleSheet.create({
     {
         borderRadius: 25,
         backgroundColor: "#6D28D9",
-        marginHorizontal: Platform.OS === "web" ? Dimensions.get('window').width/2 : Dimensions.get('window').width/5,
+        marginHorizontal: Platform.OS === "web" ? Dimensions.get('window').width / 2 : Dimensions.get('window').width / 5,
         marginVertical: 10,
+    },
+    forgotForm:
+    {
+        flex: 1,
+        marginTop: Platform.OS === "web" ? Dimensions.get('window').height / 10 : Dimensions.get('window').height / 8,
+        justifyContent: 'center',
+        alignContent: 'center'
     },
     disableAutoLoginText:
     {
-       fontSize: 20,
-       color: 'white',
-       fontWeight: 'bold',
-       alignSelf: 'center',
-       margin: 10,
+        fontSize: 20,
+        color: 'white',
+        fontWeight: 'bold',
+        alignSelf: 'center',
+        margin: 10,
     },
     root:
     {
